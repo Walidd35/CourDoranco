@@ -1,0 +1,27 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+	{{recipe.name}}
+{% endblock %}
+
+{% block body %}
+	<main class="d-flex flex-column align-items-center gap-2" >
+		<div class="container d-flex flex-column gap-2 my-3">
+			<h1>{{recipe.name}}</h1>
+			<img src={{asset('img/thumbnails/' ~ recipe.fileName)}} alt="image de {{recipe.name}}">
+			<h2>Temps de Prépartion:
+				{{recipe.duration}}
+				minutes</h2>
+			<h3>Pour
+				{{recipe.numberOfPlates}}
+				personnes</h3>
+			<h4>Liste des Ingrégient:</h4>
+			<ul>
+				{% for ingredient in recipe.ingredients %}
+					<li>{{ingredient.name}}</li>
+			{% endfor %}
+				</ul>
+			<p>{{recipe.description}}</p>
+		</div>
+	</main>
+{% endblock %}

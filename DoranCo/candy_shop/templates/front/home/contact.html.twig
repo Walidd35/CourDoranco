@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Contact Page{% endblock %}
+
+{% block body %}
+<main>
+<h1>Contact Us</h1>
+{{form_start(form)}}
+{{form_rest(form)}}
+<input type="submit" value="Send" class="btn btn-primary">
+{{form_end(form)}}
+</main>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+	{{parent()}}Product
+{% endblock %}
+
+{% block body %}
+	<main class="d-flex flex-column justify-content-center gap-5">
+		{# <pre>
+            {{ dump(products) }}
+        </pre> #}
+		<h1 class="text-center">Gérer les Produits</h1>
+		<a class="btn btn-success m-auto" href={{path('admin_product_create')}}>Ajouter un Produit</a>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>{{knp_pagination_sortable(products, 'ID', 'p.id')}}</th>
+					<th>{{knp_pagination_sortable(products, 'nom', 'p.name')}}</th>
+					<th>{{knp_pagination_sortable(products, 'date de création', 'p.createdAt')}}</th>
+					<th>{{knp_pagination_sortable(products, 'date de mise à jour', 'p.updatedAt')}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for p in products %}
+					<tr>
+						<td>{{p.id}}</td>
+						<td><a href={{path('admin_product_show', {'slug': p.slug})}}>{{p.name}}</a></td>
+						<td>{{p.createdAt|date('d/m/y')}}</td>
+						<td>{{p.updatedAt|date('d/m/y')}}</td>
+						<td>
+							<a class="btn btn-warning" href={{path('admin_product_edit', {'slug': p.slug})}}>Modifier</a>
+						</td>
+						<td>
+							<form action={{path('admin_product_delete', {'id': p.id})}} method="POST">
+							<input type="hidden" name="_method" value="DELETE">
+								<button type="submit" class="btn btn-danger">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="navigation mt-4">
+			{{ knp_pagination_render(products) }}
+		</div>
+	</main>
+{% endblock %}

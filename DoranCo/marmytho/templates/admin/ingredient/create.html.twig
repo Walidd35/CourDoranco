@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Creation d'Ingrédients{% endblock %}
+
+{% block body %}
+<main class="d-flex flex-column gap-5 align-items-center">
+<h1>Nouvel Ingrédient</h1>
+{{form_start(form)}}
+{{form_rest(form)}}
+<input type="submit" value="Enregistrer" class="btn btn-primary">
+{{form_end(form)}}
+</main>
+{% endblock %}

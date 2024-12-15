@@ -1,0 +1,30 @@
+{% extends "front/base.html.twig" %}
+
+{% block title %}
+	{{parent()}}Home
+{% endblock %}
+
+{% block body %}
+	<main>
+		<h1 class="text-center my-5">Bienvenue sur Lumi Design</h1>
+	{% include "front/partials/_hero-section.html.twig" %}
+		<div class="d-flex flex-wrap justify-content-around gap-5">
+			{% for product in products %}
+				<div class="card" style="width: 18rem;">
+					<img src={{product.image starts with 'http' ? product.image : asset('img/products/' ~ product.image) }} class="card-img-top" alt="image de {{product.image}}">
+					<div class="card-body">
+						<h5 class="card-title">{{product.name}}</h5>
+						<p>{{ product.description | slice(0, 100) }}
+							{% if product.description|length > 100 %}...
+							{% endif %}
+						</p>
+						<a href={{path('front_home_show', {'slug' : product.slug})}} class="btn btn-primary">Détails</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="navigation mt-4">
+			{{ knp_pagination_render(products) }}
+		</div>
+	</main>
+{% endblock %}
